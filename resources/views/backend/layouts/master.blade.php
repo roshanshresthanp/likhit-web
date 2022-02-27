@@ -11,8 +11,7 @@
   <!-- Font Awesome -->
   <link rel="stylesheet" href="{{asset('backend/plugins/fontawesome-free/css/all.min.css')}}">
   <!-- Toastr -->
-  <!-- summernote -->
-  <link rel="stylesheet" href="{{asset('backend/plugins/summernote/summernote-bs4.min.css')}}">
+ 
 
   <link rel="stylesheet" href="{{asset('backend/plugins/toastr/toastr.min.css')}}">
   <!-- Tempusdominus Bootstrap 4 -->
@@ -90,8 +89,9 @@
 {{-- <script src="{{asset('backend/plugins/daterangepicker/daterangepicker.js')}}"></script> --}}
 <!-- Tempusdominus Bootstrap 4 -->
 {{-- <script src="{{asset('backend/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js')}}"></script> --}}
-<!-- Summernote -->
-<script src="{{asset('backend/plugins/summernote/summernote-bs4.min.js')}}"></script>
+
+ <!-- summernote -->
+ 
 <!-- overlayScrollbars -->
 <script src="{{asset('backend/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js')}}"></script>
 <!-- Toastr -->

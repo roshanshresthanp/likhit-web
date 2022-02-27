@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\BlogController;
 use App\Http\Controllers\ContentController;
 use App\Http\Controllers\ContentTypeController;
 use App\Http\Controllers\ExamController;
@@ -48,6 +49,8 @@ Route::group(['prefix'=>'admin','middleware'=>'auth'], function(){
     Route::get('/widgets',[DashboardController::class,'widgets'])->name('widgets');
 
     Route::resource('setting',SettingController::class);
+    Route::resource('blog',BlogController::class);
+
 
     
 

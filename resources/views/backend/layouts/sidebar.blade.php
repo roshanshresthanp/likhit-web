@@ -92,6 +92,30 @@
             </a>
           </li>
 
+          <li class="nav-item {{request()->is('admin/blogs*')?'menu-is-opening menu-open  ' : '';}}">
+            <a href="#" class="nav-link {{request()->is('admin/blogs*')?'active' : '';}}">
+              <i class="nav-icon fas fa-cogs"></i>
+              <p>
+                Blogs
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{{route('blog.create')}}" class="nav-link {{request()->is('admin/blog/create')?'active ' : '';}}">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Add blog</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{route('blog.index')}}" class="nav-link {{request()->is('admin/blog/index')?'active ' : '';}}">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>View Blog</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+
           <li class="nav-item {{request()->is('admin/setting*')?'menu-is-opening menu-open  ' : '';}}">
             <a href="#" class="nav-link {{request()->is('admin/setting*')?'active' : '';}}">
               <i class="nav-icon fas fa-cogs"></i>
