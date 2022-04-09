@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Exam;
+use App\Models\Subject;
 use Illuminate\Contracts\Session\Session;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
@@ -12,7 +13,6 @@ class ExamController extends Controller
 {
     public function index(Request $request)
     {
-        
         $exams = Exam::latest()->get();
         return view('backend.exams.index',compact('exams'));
     }
@@ -41,7 +41,7 @@ class ExamController extends Controller
         ]);
         $data = $request->all();
         if($request->hasFile('featured_img')){
-            $data['featured_img'] = $request->file('featured_img')->store('uploads');
+            $data['featured_img'] = $request->file('featured_img')->store('exams','uploads');
         }
         $data['slug'] = Str::slug($request->title);
         try{
@@ -95,7 +95,7 @@ class ExamController extends Controller
         ]);
         $data = $request->all();
         if($request->hasFile('featured_img')){
-            $data['featured_img'] = $request->file('featured_img')->store('uploads');
+            $data['featured_img'] = $request->file('featured_img')->store('exams','uploads');
         }
         $data['slug'] = Str::slug($request->title);
         try{
@@ -121,7 +121,8 @@ class ExamController extends Controller
 
     public function examSubject($id)
     {
-        $exam = Exam::findOrFail($id)->subjects;
+        $exam = Exam::findOrFail($id);
+        $subjects = Subject::all();
         // dd($exam);
         return view('backend.subjects.index',compact('exam'));
     }

@@ -18,4 +18,9 @@ class Exam extends Model
         return $this->hasMany(Subject::class,'exam_id');
     }
 
+    public function questions()
+    {
+        return $this->hasManyThrough(Question::class,ExamSubject::class,'exam_id','exams_subject_id');
+    }
+
 }

@@ -2,19 +2,20 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Exam;
 use App\Models\ExamSubject;
-use App\Models\Subject;
 use Illuminate\Http\Request;
-use Illuminate\Support\Str;
-use Symfony\Component\HttpFoundation\Session\Session;
 
-class SubjectController extends Controller
+class ExamSubjectController extends Controller
 {
     public function index(Request $request)
     {
-        
-        $subjects = Subject::latest()->get();
-        return view('backend.subjects.index',compact('subjects'));
+        // $subjects = ExamSubject::latest()->get();
+        // return view('backend.subjects.index',compact('subjects'));
+
+        $car = Exam::find(1)->questions;
+        $bike = Exam::find(2)->questions;
+        return $bike;
     }
 
     /**
@@ -37,7 +38,6 @@ class SubjectController extends Controller
     {
         $this->validate($request,[
             'title'=>'required|max:225',
-            'exam_id'=>'integer',
             'featured_img'=>'nullable|mimes:png,jpg,svg,web,jpeg'
         ]);
         $data = $request->all();
@@ -46,16 +46,8 @@ class SubjectController extends Controller
         }
         $data['slug'] = Str::slug($request->title);
         try{
-            $sub = Subject::create($data);
-            if($request->has('exam_id')){
-                $subId = $sub->id;
-                $examId = $request->exam_id;
-                for($i=0;$i<count($examId);$i++){
-                ExamSubject::create(['exam_id'=>$request->examId[$i],['subject_id'=>$subId]]);
-                };
-            }
-            
-            return redirect()->route('subjects.index')->with('success','Subject has been added successfully');
+            ExamSubject::create($data);
+            return redirect()->route('subjects.index')->with('success','ExamSubject has been added successfully');
         }catch(\Exception $e){
             return redirect()->back()->with(['error'=>$e]);
         }
@@ -83,7 +75,7 @@ class SubjectController extends Controller
      */
     public function edit($id)
     {
-        $subject = Subject::find($id);
+        $subject = ExamSubject::find($id);
         return view('backend.subjects.form',compact('subject'));
 
     }
@@ -107,8 +99,8 @@ class SubjectController extends Controller
         }
         $data['slug'] = Str::slug($request->title);
         try{
-            Subject::findOrFail($id)->update($data);
-            return redirect()->route('subjects.index')->with('success','Subject has been updated successfully');
+            ExamSubject::findOrFail($id)->update($data);
+            return redirect()->route('subjects.index')->with('success','ExamSubject has been updated successfully');
         }catch(\Exception $e){
             // Session::flash('message', 'This is a message!');
             return redirect()->back()->with(['error'=>$e]);
@@ -123,7 +115,7 @@ class SubjectController extends Controller
      */
     public function destroy($id)
     {
-        Subject::findOrFail($id)->delete();
-        return redirect()->back()->with('success','Subject has been deleted successfully');
+        ExamSubject::findOrFail($id)->delete();
+        return redirect()->back()->with('success','ExamSubject has been deleted successfully');
     }
 }

@@ -8,16 +8,16 @@
           <div class="row col-sm-6 d-flex justify-content-between">
             {{-- <h1>Exam Type</h1> --}}
             <button class="btn btn-light">
-            <a href="{{ route('widgets') }}"> <span class="fa fa-arrow-left mr-2"></span> BACK</a>
+            <a href=""> <span class="fa fa-arrow-left mr-2"></span> BACK</a>
           </button>
 
-            <a class="btn btn-primary" href="{{ route('exams.create') }}"> <span class="fa fa-plus mr-2"></span>Add Exam</a>
+            <a class="btn btn-primary" href="{{ route('subjects.create') }}"> <span class="fa fa-plus mr-2"></span>Add Subject</a>
 
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Home</a></li>
-              <li class="breadcrumb-item active">exams</li>
+              <li class="breadcrumb-item active">subjects</li>
             </ol>
           </div>
         </div>
@@ -28,9 +28,9 @@
     <section class="content">
       <div class="container-fluid">
           
-        <h5 class="mb-2 mt-4">Exams</h5>
+        <h5 class="mb-2 mt-4">Subjects</h5>
         <div class="row">
-          @forelse ($exams as $exam)
+          @forelse ($subject as $sub)
           <div class="col-lg-3 col-6">
             <div class="card-info">
               <div class="card-header ">
@@ -43,10 +43,10 @@
                   <button type="button" class="btn btn-tool" data-card-widget="collapse">
                     <i class="fas fa-minus"></i>
                   </button> --}}
-                  <form id="d" action="{{ route('exams.destroy',$exam->id) }}" method="POST">
+                  <form id="d" action="{{ route('subjects.destroy',$sub->id) }}" method="POST">
                     @csrf
                     @method('DELETE')
-                    <a href="{{ route('exams.edit',$exam->id) }}" title="Edit" class="btn btn-tool">
+                    <a href="{{ route('subjects.edit',$sub->id) }}" title="Edit" class="btn btn-tool">
                       <i class="fas fa-edit"></i></a>
                   <button type="submit" title="Delete" onclick="return confirm('Are you sure to delete this record ?')" class="btn btn-tool">
                     <i class="fas fa-times"></i>
@@ -59,16 +59,16 @@
             
             <div class="small-box bg-light">
               <div class="inner">
-                {{-- <p>{{ $exam->title }}</p> --}}
+                {{-- <p>{{ $sub->title }}</p> --}}
 
-                <h4 class="pt-4 pb-4">{{str_limit($exam->title,12) }}</h4>
+                <h4 class="p-4">{{ $sub->title }}</h4>
 
               </div>
               <div class="icon">
-                <i class="fas"><a href="{{route('exam.subject',$exam->id)}}"><img src="{{ Storage::disk('uploads')->url($exam->featured_img) }}" height="80px" width="85px">
+                <i class="fas"><a href="dada"><img src="{{ Storage::url($sub->featured_img) }}" onerror="this.src='{{Storage::url('uploads/noimage.jpg')}}';" height="80px" width="85px">
                </a> </i>
               </div>
-              <a href="{{route('exam.subject',$exam->id)}}" class="small-box-footer ">
+              <a href="#" class="small-box-footer ">
                 view detail <i class="fas fa-arrow-circle-right"></i>
               </a>
             </div>

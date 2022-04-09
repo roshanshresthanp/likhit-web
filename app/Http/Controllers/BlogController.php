@@ -36,7 +36,7 @@ class BlogController extends Controller
             $input = $request->all();
              $input['status'] = $request->publish_status ?? 0;
             if($request->hasFile('image')){
-                $input['image'] = $request->file('image')->store('uploads');
+                $input['image'] = $request->file('image')->store('blogs','uploads');
             }
             $input['slug'] = Str::slug($request->title);
             Blog::create($input);
@@ -59,7 +59,7 @@ class BlogController extends Controller
             $input = $request->all();
             $input['status'] = $request->publish_status ?? 0;
             if($request->hasFile('image')){
-                $input['image'] = $request->file('image')->store('uploads');
+                $input['image'] = $request->file('image')->store('blogs','uploads');
             }
             $input['slug'] = Str::slug($request->title);
             Blog::findOrFail($id)->update($input);

@@ -91,7 +91,61 @@
               </p>
             </a>
           </li>
-
+          <li class="nav-item {{request()->is('admin/subjects*')?'menu-is-opening menu-open  ' : '';}}">
+            <a href="#" class="nav-link {{request()->is('admin/blogs*')?'active' : '';}}">
+              <i class="nav-icon fas fa-chalkboard"></i>
+              <p>
+                Subjects
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{{route('subjects.create')}}" class="nav-link {{request()->is('admin/subjects/create')?'active ' : '';}}">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Add subject</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{route('subjects.index')}}" class="nav-link {{request()->is('admin/subjects/index')?'active ' : '';}}">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>View subject</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a href="{{route('exam-subject.index')}}" class="nav-link {{request()->is('admin/exam-subject*')?'active' : '';}}">
+              <i class="nav-icon fas fa-th"></i>
+              <p>
+                Exam and Subject
+                {{-- <span class="right badge badge-danger">New</span> --}}
+              </p>
+            </a>
+          </li>
+          <li class="nav-item {{request()->is('admin/questions*')?'menu-is-opening menu-open  ' : '';}}">
+            <a href="#" class="nav-link {{request()->is('admin/blogs*')?'active' : '';}}">
+              <i class="nav-icon fas fa-chalkboard"></i>
+              <p>
+                Question and Answer
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{{route('questions.create')}}" class="nav-link {{request()->is('admin/questions/create')?'active ' : '';}}">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Add Q&A</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{route('questions.index')}}" class="nav-link {{request()->is('admin/questions/index')?'active ' : '';}}">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>View Q&A</p>
+                </a>
+              </li>
+            </ul>
+          </li>
           <li class="nav-item {{request()->is('admin/blogs*')?'menu-is-opening menu-open  ' : '';}}">
             <a href="#" class="nav-link {{request()->is('admin/blogs*')?'active' : '';}}">
               <i class="nav-icon fas fa-cogs"></i>

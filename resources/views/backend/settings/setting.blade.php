@@ -1,4 +1,4 @@
-@extends('backend.layouts.master')
+  @extends('backend.layouts.master')
 @section('content')
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -65,12 +65,12 @@
                   <div class="form-group col-sm-6 mb-0">
                     <label for="address">Logo</label> <br>
                     <input type="file" name="logo"  accept="image/*" onchange="loadFile(event)">
-                    <img id="output" src="{{Storage::url($setting->logo)}}" onerror="this.src='{{Storage::url('uploads/noimage.jpg')}}';" height="120px" width="140px">
+                    <img id="output" src="{{Storage::disk('uploads')->url($setting->logo?? 'noimage.jpg')}}" height="120px" width="140px">
                   </div>
                   <div class="form-group col-sm-6 mb-0">
                     <label for="address">Favicon (Optional)</label> <br>
                     <input type="file" name="favicon" accept="image/*" onchange="loadFavicon(event)">
-                    <img id="outputFavicon" src="{{Storage::url($setting->favicon)}}" onerror="this.src='{{Storage::url('uploads/noimage.jpg')}}';" height="120px" width="140px">
+                    <img id="outputFavicon" src="{{Storage::disk('uploads')->url($setting->favicon??'noimage.jpg')}}" height="120px" width="140px">
                   </div>
                   
                   

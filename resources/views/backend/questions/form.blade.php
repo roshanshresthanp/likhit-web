@@ -13,12 +13,12 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                <h1><a href="{{route('exams.index')}}" class="btn btn-info"><span class="fas fa-eye mr-2"></span>View Exams</a></h1>
+                <h1><a href="{{route('questions.index')}}" class="btn btn-info"><span class="fas fa-eye mr-2"></span>View Q&A</a></h1>
                 </div>
                 <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
                     <li class="breadcrumb-item"><a href="{{route('dashboard')}}">Home</a></li>
-                    <li class="breadcrumb-item active">exams</li>
+                    <li class="breadcrumb-item active">questions</li>
                 </ol>
                 </div>
             </div>
@@ -30,15 +30,15 @@
             <div class="d-flex justify-content-center">
                 <div class="col-md-11">   
                     <div class="card">
-                           @isset($exam)
+                           @isset($question)
                            <h4 class="card-header">Update Exam type </h4>
 
-                           <form method="POST" action="{{route('exams.update',$exam->id)}}" enctype="multipart/form-data">
+                           <form method="POST" action="{{route('questions.update',$question->id)}}" enctype="multipart/form-data">
                             @csrf
                             @method('PUT')
                            @else
-                           <h4 class="card-header">Add New Exam type </h4>
-                        <form method="POST" action="{{route('exams.store')}}" enctype="multipart/form-data">
+                           <h4 class="card-header">Add Question & Answer</h4>
+                        <form method="POST" action="{{route('questions.store')}}" enctype="multipart/form-data">
                             @csrf
                             @method('POST')
                             @endisset
@@ -59,16 +59,59 @@
                                 </div> --}}
 
                                 <div class="form-group col-md-6">
-                                <label>Title</label>
-                                    <input id="title" type="text" class="form-control"
-                                        name="title" value="{{isset($exam)? $exam->title:old('title') }}">
-                                        <p style="color: red;">{{ $errors->first('title')}}</p>
+                                    <label>Select Exam</label>
+                                        <select id="question"class="form-control" name="exam_id">
+                                            @foreach ($exams as $item)
+                                                <option value="{{ $item->id }}">{{ $item->title }}</option>
+                                            @endforeach
+                                        </select>
+                                        <p style="color: red;">{{ $errors->first('exam_id')}}</p>
                                 </div>
-                                <div class="form-group col-sm-6 mb-0">
+                                <div class="form-group col-md-6">
+                                    <label>Select Subject</label>
+                                        <select id="subject_id"class="form-control" name="subject_id">
+                                            @foreach ($subjects as $item)
+                                                <option value="{{ $item->id }}">{{ $item->title }}</option>
+                                            @endforeach
+                                        </select>
+                                        <p style="color: red;">{{ $errors->first('subject_id')}}</p>
+                                </div>
+
+                                <div class="form-group col-md-12">
+                                <label>Question</label>
+                                    <input id="question" type="text" class="form-control"
+                                        name="question" value="{{isset($question)? $question->question:old('question') }}">
+                                        <p style="color: red;">{{ $errors->first('question')}}</p>
+                                </div>
+                                {{-- <div class="form-group col-sm-6 mb-0">
                                     <label for="address">Featured image</label> <br>
                                     <input type="file" class="" name="featured_img" accept="image/*" onchange="loadFavicon(event)">
-                                    <img id="outputFavicon" src="{{Storage::disk('uploads')->url($exam->featured_img??'noimage.jpg')}}" height="120px" width="140px">
+                                    <img id="outputFavicon" src="{{Storage::disk('uploads')->url($question->featured_img??'noimage.jpg')}}" height="120px" width="140px">
                                     <p style="color: red;">{{ $errors->first('featured_img')}}</p>
+                                </div> --}}
+                                <label class="col-12">Answers</label>
+
+                                <div class="row">
+                                <div class="form-group col-md-3">
+                                    <input id="answer" type="text" class="form-control"
+                                        name="right_answer" value="{{isset($question)? $question->right_answer:old('right_answer') }}" placeholder="1. Right Answer">
+                                        <p style="color: red;">{{ $errors->first('right_answer')}}</p>
+                                </div>
+                                <div class="form-group col-md-3">
+                                        <input id="answer" type="text" class="form-control"
+                                            name="answer[]" value="{{isset($question)? $question->answer:old('right_answer') }}" placeholder="2. Answer">
+                                            <p style="color: red;">{{ $errors->first('answer')}}</p>
+                                </div>
+                                <div class="form-group col-md-3">
+                                    <input id="answer" type="text" class="form-control"
+                                        name="answer[]" value="{{isset($question)? $question->answer:old('right_answer') }}" placeholder="3. Answer">
+                                        <p style="color: red;">{{ $errors->first('answer')}}</p>
+                            </div>
+                            <div class="form-group col-md-3">
+                                <input id="answer" type="text" class="form-control"
+                                    name="answer[]" value="{{isset($question)? $question->answer:old('right_answer') }}" placeholder="4. Answer">
+                                    <p style="color: red;">{{ $errors->first('answer')}}</p>
+                            </div>
                                 </div>
 
                                 {{-- <div class="form-group col-md-6">                    

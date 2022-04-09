@@ -2,7 +2,7 @@
 
 @push('style')
 <!-- Select2 -->
-<link rel="stylesheet" href="{{asset('backend/plugins/select2/css/select2.min.css')}}">
+{{-- <link rel="stylesheet" href="{{asset('backend/plugins/select2/css/select2.min.css')}}"> --}}
 {{-- <link rel="stylesheet" href="{{asset('backend/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css')}}"> --}}
 
 @endpush
@@ -31,43 +31,28 @@
                 <div class="col-md-11">   
                     <div class="card">
                            @isset($subject)
-                           <h4 class="card-header">Update Subject type </h4>
-
-                           <form method="POST" action="{{route('subjects.update',$exam->id)}}" enctype="multipart/form-data">
+                           <h4 class="card-header">Update Subject</h4>
+                           <form method="POST" action="{{route('subjects.update',$subject->id)}}" enctype="multipart/form-data">
                             @csrf
                             @method('PUT')
                            @else
-                           <h4 class="card-header">Add New Subject type </h4>
-                        <form method="POST" action="{{route('subjects.store')}}" enctype="multipart/form-data">
+                           <h4 class="card-header">Add Subject</h4>
+                            <form method="POST" action="{{route('subjects.store')}}" enctype="multipart/form-data">
                             @csrf
                             @method('POST')
                             @endisset
-
                             <div class="card-body row">
-
-                                {{-- <div class="form-group col-md-6">
-                                  <label>Minimal</label>
-                                  <select class="select2 form-control" style="width:100%;">
-                                    <option >Alabama</option>
-                                    <option>Alaska</option>
-                                    <option>California</option>
-                                    <option selected="selected">Delaware</option>
-                                    <option>Tennessee</option>
-                                    <option>Texas</option>
-                                    <option>Washington</option>
-                                  </select>
-                                </div> --}}
 
                                 <div class="form-group col-md-6">
                                 <label>Title</label>
                                     <input id="title" type="text" class="form-control"
-                                        name="title" value="{{isset($exam)? $exam->title:old('title') }}">
+                                        name="title" value="{{isset($subject)? $subject->title:old('title') }}">
                                         <p style="color: red;">{{ $errors->first('title')}}</p>
                                 </div>
                                 <div class="form-group col-sm-6 mb-0">
                                     <label for="address">Featured image</label> <br>
                                     <input type="file" class="" name="featured_img" accept="image/*" onchange="loadFavicon(event)">
-                                    <img id="outputFavicon" @isset($exam) src="{{Storage::url($exam->featured_img)}}" @endisset onerror="this.src='{{Storage::url('uploads/noimage.jpg')}}';" height="120px" width="140px">
+                                    <img id="outputFavicon" src="{{Storage::disk('uploads')->url($subject->featured_img??'noimage.jpg')}}" height="120px" width="140px">
                                     <p style="color: red;">{{ $errors->first('featured_img')}}</p>
                                 </div>
 
@@ -118,22 +103,17 @@
    
 @endsection
 @push('script')
-<script src="{{asset('backend/plugins/select2/js/select2.full.min.js')}}"></script>
+{{-- <script src="{{asset('backend/plugins/select2/js/select2.full.min.js')}}"></script> --}}
 <script>
-$(function () {
-    //Initialize Select2 Elements
-    $('.select2').select2()
-});
-
-  var loadFavicon = function(event) {
+// $(function () {
+//     $('.select2').select2()
+// });
+var loadFavicon = function(event) {
     var output = document.getElementById('outputFavicon');
     output.src = URL.createObjectURL(event.target.files[0]);
     output.onload = function() {
       URL.revokeObjectURL(output.src) // free memory
     }
   };
-// $('.select2bs4').select2({
-//       theme: 'bootstrap4'
-//     });
 </script>
 @endpush

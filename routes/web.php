@@ -8,6 +8,8 @@ use App\Http\Controllers\BlogController;
 use App\Http\Controllers\ContentController;
 use App\Http\Controllers\ContentTypeController;
 use App\Http\Controllers\ExamController;
+use App\Http\Controllers\ExamSubjectController;
+use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\SubjectController;
 use App\Models\ContentType;
 
@@ -42,6 +44,10 @@ Route::group(['prefix'=>'admin','middleware'=>'auth'], function(){
     Route::resource('content', ContentController::class);
     Route::resource('exams', ExamController::class);
     Route::resource('subjects', SubjectController::class);
+    Route::resource('questions', QuestionController::class);
+
+    Route::resource('exam-subject', ExamSubjectController::class);
+
 
     Route::get('/exam/{id}/subjects',[ExamController::class,'examSubject'])->name('exam.subject');
 
